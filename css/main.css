@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+}
+
+h1,
+p {
+  font-family: "Raleway", sans-serif;
+}
+
+h1 {
+  color: #3db642;
+  font-size: 50px;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+p {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+}
+
+.slideshow {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.slideshow .slides {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.slideshow .slides .slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: black;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.slideshow .slides .slide img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slideshow .slides .slide .content {
+  position: relative;
+  margin-left: 50px;
+  width: 300px;
+}
+
+.current-slide {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
