@@ -6,24 +6,37 @@
     <title>Animated Slideshows</title>
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/materialize.min.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;900&display=swap"
       rel="stylesheet"
     />
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    /> -->
   </head>
   <body>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Logo</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
-          <li><a href="collapsible.html">JavaScript</a></li>
-        </ul>
-      </div>
-    </nav>
+    <div class="navbar-fixed">
+      <nav class="transparent">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Logo</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
 
     <div class="slideshow">
       <div class="slides">

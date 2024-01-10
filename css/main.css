@@ -1,9 +1,15 @@
+.b {
+  border: 1px solid black;
+}
+
 body {
   margin: 0;
 }
 
 h1,
-p {
+p,
+a,
+.brand-logo {
   font-family: "Raleway", sans-serif;
 }
 
@@ -24,6 +30,7 @@ p {
   width: 100%;
   height: 100vh;
   position: relative;
+  background-color: black;
 }
 
 .slideshow .slides {
@@ -41,7 +48,6 @@ p {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  background-color: black;
   pointer-events: none;
   opacity: 0;
 }
@@ -60,6 +66,57 @@ p {
 }
 
 .current-slide {
-  opacity: 1 !important;
+  opacity: 0.8 !important;
   pointer-events: auto !important;
+}
+
+/* Class overrides */
+.navbar-fixed {
+  position: absolute !important;
+  height: 64px;
+}
+
+nav {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+nav .nav-wrapper {
+  padding: 0 50px;
+}
+
+nav,
+nav i,
+nav [class^="mdi-"],
+nav [class*="mdi-"],
+nav i.material-icons,
+nav .sidenav-trigger i {
+  height: 64px;
+  line-height: 64px;
+}
+
+nav ul a {
+  -webkit-transition: color 0.3s ease-in-out !important;
+  transition: color 0.3s ease-in-out !important;
+}
+
+nav ul a:hover {
+  background-color: transparent !important;
+  color: #3db642;
+}
+
+nav ul li.active {
+  background-color: transparent;
+  color: #3db642;
+  font-weight: bold;
+}
+
+.brand-logo {
+  /* font-family: "Dancing Script", cursive; */
+  font-weight: 400;
+  transition: color 0.3s ease-in-out !important;
+}
+
+.brand-logo:hover {
+  color: #3db642;
 }
