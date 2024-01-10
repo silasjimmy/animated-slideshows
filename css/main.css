@@ -9,6 +9,7 @@ body {
 h1,
 p,
 a,
+span,
 .brand-logo {
   font-family: "Raleway", sans-serif;
 }
@@ -79,6 +80,37 @@ p {
   width: 300px;
 }
 
+.slideshow .indicators {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.slideshow .indicators span {
+  font-size: 16px;
+  /* margin: 0 5px; */
+  cursor: pointer;
+  -webkit-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+  color: #ffffff;
+}
+
+.slideshow .indicators .bar {
+  width: 26px;
+  height: 2px;
+  background-color: #ffffff;
+  margin: 0 8px;
+}
+
+.slideshow .indicators span:hover {
+  color: #3db642;
+}
+
 .current-slide {
   opacity: 0.8 !important;
   pointer-events: auto !important;
@@ -117,6 +149,7 @@ nav .sidenav-trigger i {
 nav ul a {
   -webkit-transition: color 0.3s ease-in-out !important;
   transition: color 0.3s ease-in-out !important;
+  font-size: 16px !important;
 }
 
 nav ul a:hover {
