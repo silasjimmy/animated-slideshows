@@ -10,6 +10,7 @@
       );
 
       this.createNav();
+      this.init();
     }
 
     /**
@@ -30,7 +31,22 @@
       }
     }
 
-    navigate() {}
+    init() {
+      // Add click event listener to navigation buttons
+      let navButtons = Array.from(this.navWrapper.querySelectorAll("span.num"));
+
+      navButtons.forEach((el) => {
+        el.addEventListener("click", () => {
+          const index = navButtons.indexOf(el);
+          this.slideshow
+            .querySelector(".slides > .current-slide")
+            .classList.remove("current-slide");
+          this.slides[index].classList.add("current-slide");
+        });
+      });
+    }
+
+    navigate(el) {}
   }
 
   new Slideshow(document.querySelector(".slideshow"));
