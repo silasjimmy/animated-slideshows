@@ -80,7 +80,7 @@ p {
   width: 300px;
 }
 
-.slideshow .indicators {
+.slideshow .navigation {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -91,7 +91,7 @@ p {
   align-items: center;
 }
 
-.slideshow .indicators span {
+.slideshow .navigation span {
   font-size: 16px;
   /* margin: 0 5px; */
   cursor: pointer;
@@ -100,14 +100,14 @@ p {
   color: #ffffff;
 }
 
-.slideshow .indicators .bar {
+.slideshow .navigation .bar {
   width: 26px;
   height: 2px;
   background-color: #ffffff;
   margin: 0 8px;
 }
 
-.slideshow .indicators span:hover {
+.slideshow .navigation span:hover {
   color: #3db642;
 }
 
