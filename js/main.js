@@ -53,27 +53,23 @@
     }
 
     navigate(dir) {
-      const animateSlideImage = () => {
-        return new Promise((resolve, reject) => {
-          anime({
-            targets: this.slides[this.currentSlideIndex],
-            translateX: dir === "next" ? -1 * this.rect.width : this.rect.width,
-            duration: 800,
-            easing: dir === "next" ? "easeInCubic" : "easeInOutCubic",
-            complete: () => resolve(),
-          });
+      const animateSlideImage = (slide) => {
+        const slideWidth = slide.getBoundingClientRect().width;
+
+        return anime({
+          targets: slide,
+          translateX: dir === "next" ? -1 * slideWidth : slideWidth,
+          duration: 800,
+          easing: dir === "next" ? "easeInCubic" : "easeInOutCubic",
+          // complete: () => resolve(),
         });
       };
 
-      const animateSlideText = () => {
-        return new Promise((resolve, reject) => {
-          // Animate slide title
-          anime({
-            targets:
-              this.slideTitles[this.currentSlideIndex].querySelectorAll(
-                "h1 > span"
-              ),
-            direction: "reverse",
+      const animateSlideText = (slide) => {
+        const animation = anime
+          .timeline({
+            targets: slide.querySelectorAll("h1 > span"),
+            direction: dir === "next" ? "normal" : "reverse",
             duration: 800,
             delay: function (el, index) {
               return index * 50;
@@ -83,16 +79,11 @@
             translateY: function (el, index) {
               return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
             },
-          });
-
-          // Animate slide subtitle
-          anime({
-            targets:
-              this.slideSubTitles[this.currentSlideIndex].querySelectorAll(
-                "p > span"
-              ),
+          })
+          .add({
+            targets: slide.querySelectorAll("p > span"),
             duration: 500,
-            direction: "reverse",
+            direction: dir === "next" ? "normal" : "reverse",
             delay: function (el, index) {
               return index * 20;
             },
@@ -101,50 +92,60 @@
             translateY: function (el, index) {
               return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
             },
-            complete: () => resolve(),
           });
-        });
+
+        return animation;
       };
 
-      // animateSlideImage();
+      /**
+       * Next animation pseudocode
+       * 1. reverse current slide subtitle
+       * 2. reverse current slide title
+       * 3. exit current slide image
+       * 4. enter next slide image
+       * 5. normal next slide title
+       * 6. normal next slide subtitle
+       */
+
+      animateSlideImage(this.slides[this.currentSlideIndex]);
 
       // Next slide animation
 
-      const nextSlideAnimation = anime
-        .timeline({
-          targets:
-            this.slideSubTitles[this.currentSlideIndex].querySelectorAll(
-              "p > span"
-            ),
-          duration: 500,
-          direction: "reverse",
-          delay: function (el, index) {
-            return index * 20;
-          },
-          easing: "easeOutElastic",
-          opacity: [0, 1],
-          translateY: function (el, index) {
-            return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
-          },
-        })
-        .add({
-          targets:
-            this.slideTitles[this.currentSlideIndex].querySelectorAll(
-              "h1 > span"
-            ),
-          direction: "reverse",
-          duration: 800,
-          delay: function (el, index) {
-            return index * 50;
-          },
-          easing: "easeOutElastic",
-          opacity: [0, 1],
-          translateY: function (el, index) {
-            return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
-          },
-        });
+      // const nextSlideAnimation = anime
+      //   .timeline({
+      //     targets:
+      //       this.slideTitles[this.currentSlideIndex].querySelectorAll(
+      //         "h1 > span"
+      //       ),
+      //     direction: dir === "next" ? "normal" : "reverse",
+      //     duration: 800,
+      //     delay: function (el, index) {
+      //       return index * 50;
+      //     },
+      //     easing: "easeOutElastic",
+      //     opacity: [0, 1],
+      //     translateY: function (el, index) {
+      //       return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+      //     },
+      //   })
+      //   .add({
+      //     targets:
+      //       this.slideSubTitles[this.currentSlideIndex].querySelectorAll(
+      //         "p > span"
+      //       ),
+      //     duration: 500,
+      //     direction: dir === "next" ? "normal" : "reverse",
+      //     delay: function (el, index) {
+      //       return index * 20;
+      //     },
+      //     easing: "easeOutElastic",
+      //     opacity: [0, 1],
+      //     translateY: function (el, index) {
+      //       return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+      //     },
+      //   });
 
-      nextSlideAnimation.finished.then(animateSlideImage);
+      // nextSlideAnimation.finished.then(animateSlideImage);
 
       // // Update the index of the current slide
       // this.currentSlideIndex = this.slides.indexOf(
