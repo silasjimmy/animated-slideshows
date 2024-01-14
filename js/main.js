@@ -2,15 +2,19 @@
   class Slideshow {
     constructor(el) {
       this.slideshow = el;
-      this.navWrapper = this.slideshow.querySelector(".navigation");
-
-      // Slides
+      this.rect = this.slideshow.getBoundingClientRect();
       this.slides = Array.from(
         this.slideshow.querySelectorAll(".slides > .slide")
       );
 
-      this.createNav();
-      this.init();
+      this.navWrapper = this.slideshow.querySelector(".navigation");
+      this.prevCtrl = this.navWrapper.querySelector("span.prev");
+      this.nextCtrl = this.navWrapper.querySelector("span.next");
+
+      this.currentSlideIndex = 0;
+
+      // this.createNav();
+      this.initEvents();
     }
 
     /**
@@ -31,22 +35,28 @@
       }
     }
 
-    init() {
-      // Add click event listener to navigation buttons
-      let navButtons = Array.from(this.navWrapper.querySelectorAll("span.num"));
-
-      navButtons.forEach((el) => {
-        el.addEventListener("click", () => {
-          const index = navButtons.indexOf(el);
-          this.slideshow
-            .querySelector(".slides > .current-slide")
-            .classList.remove("current-slide");
-          this.slides[index].classList.add("current-slide");
-        });
-      });
+    initEvents() {
+      this.prevCtrl.addEventListener("click", () => this.navigate("prev"));
+      this.nextCtrl.addEventListener("click", () => this.navigate("next"));
     }
 
-    navigate(el) {}
+    navigate(dir) {
+      const currentSlide = this.slides[this.currentSlideIndex];
+
+      anime({
+        targets: currentSlide,
+        translateX: dir === "next" ? -1 * this.rect.width : this.rect.width,
+        duration: 800,
+        easing: dir === "next" ? "easeInCubic" : "easeOutCubic",
+      });
+
+      // // Update the index of the current slide
+      // this.currentSlideIndex = this.slides.indexOf(
+      //   this.slideshow.querySelector(".slides > .current-slide")
+      // );
+
+      // console.log(this.rect.width);
+    }
   }
 
   new Slideshow(document.querySelector(".slideshow"));
