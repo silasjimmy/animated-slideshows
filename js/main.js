@@ -53,80 +53,103 @@
     }
 
     navigate(dir) {
-      const currentSlide = this.slides[this.currentSlideIndex];
+      const animateSlideImage = () => {
+        return new Promise((resolve, reject) => {
+          anime({
+            targets: this.slides[this.currentSlideIndex],
+            translateX: dir === "next" ? -1 * this.rect.width : this.rect.width,
+            duration: 800,
+            easing: dir === "next" ? "easeInCubic" : "easeInOutCubic",
+            complete: () => resolve(),
+          });
+        });
+      };
 
-      // anime({
-      //   targets: currentSlide,
-      //   translateX: dir === "next" ? -1 * this.rect.width : this.rect.width,
-      //   duration: 800,
-      //   easing: dir === "next" ? "easeInCubic" : "easeOutCubic",
-      // });
+      const animateSlideText = () => {
+        return new Promise((resolve, reject) => {
+          // Animate slide title
+          anime({
+            targets:
+              this.slideTitles[this.currentSlideIndex].querySelectorAll(
+                "h1 > span"
+              ),
+            direction: "reverse",
+            duration: 800,
+            delay: function (el, index) {
+              return index * 50;
+            },
+            easing: "easeOutElastic",
+            opacity: [0, 1],
+            translateY: function (el, index) {
+              return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+            },
+          });
 
-      // const animateSlideText
+          // Animate slide subtitle
+          anime({
+            targets:
+              this.slideSubTitles[this.currentSlideIndex].querySelectorAll(
+                "p > span"
+              ),
+            duration: 500,
+            direction: "reverse",
+            delay: function (el, index) {
+              return index * 20;
+            },
+            easing: "easeOutElastic",
+            opacity: [0, 1],
+            translateY: function (el, index) {
+              return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+            },
+            complete: () => resolve(),
+          });
+        });
+      };
 
-      anime({
-        targets:
-          this.slideTitles[this.currentSlideIndex].querySelectorAll(
-            "h1 > span"
-          ),
-        duration: 800,
-        delay: function (el, index) {
-          return index * 50;
-        },
-        easing: "easeOutElastic",
-        opacity: [0, 1],
-        translateY: function (el, index) {
-          return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
-        },
-      });
+      // animateSlideImage();
 
-      anime({
-        targets:
-          this.slideSubTitles[this.currentSlideIndex].querySelectorAll(
-            "p > span"
-          ),
-        duration: 500,
-        delay: function (el, index) {
-          return index * 20;
-        },
-        easing: "easeOutElastic",
-        opacity: [0, 1],
-        translateY: function (el, index) {
-          return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
-        },
-      });
+      // Next slide animation
 
-      //     'fx18' : {
-      // 		in: {
-      // 			duration: 800,
-      // 			delay: function(el, index) { return 600+index*150; },
-      // 			easing: 'easeInOutQuint',
-      // 			opacity: 1,
-      // 			scaleY: [8,1],
-      // 			scaleX: [0.5,1],
-      // 			translateY: ['-100%','0%']
-      // 		},
-      // 		out: {
-      // 			duration: 800,
-      // 			delay: function(el, index) { return index*150; },
-      // 			easing: 'easeInQuint',
-      // 			opacity: 0,
-      // 			scaleY: {
-      // 				value: 8,
-      // 				delay: function(el, index) { return 100+index*150; },
-      // 			},
-      // 			scaleX: 0.5,
-      // 			translateY: '100%'
-      // 		}
-      // 	}
-      // };
+      const nextSlideAnimation = anime
+        .timeline({
+          targets:
+            this.slideSubTitles[this.currentSlideIndex].querySelectorAll(
+              "p > span"
+            ),
+          duration: 500,
+          direction: "reverse",
+          delay: function (el, index) {
+            return index * 20;
+          },
+          easing: "easeOutElastic",
+          opacity: [0, 1],
+          translateY: function (el, index) {
+            return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+          },
+        })
+        .add({
+          targets:
+            this.slideTitles[this.currentSlideIndex].querySelectorAll(
+              "h1 > span"
+            ),
+          direction: "reverse",
+          duration: 800,
+          delay: function (el, index) {
+            return index * 50;
+          },
+          easing: "easeOutElastic",
+          opacity: [0, 1],
+          translateY: function (el, index) {
+            return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+          },
+        });
+
+      nextSlideAnimation.finished.then(animateSlideImage);
 
       // // Update the index of the current slide
       // this.currentSlideIndex = this.slides.indexOf(
       //   this.slideshow.querySelector(".slides > .current-slide")
       // );
-
-      // console.log(this.rect.width);
     }
   }
 
