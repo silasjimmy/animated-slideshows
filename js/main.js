@@ -55,25 +55,10 @@
     navigate(dir) {
       const currentSlide = this.slides[this.currentSlideIndex];
 
-      const slideImageAnimation = () => {
-        return new Promise((resolve, reject) => {
-          anime({
-            targets: currentSlide,
-            duration: 800,
-            easing: "easeOutQuint",
-            translateX: dir === "next" ? -1 * this.rect.width : this.rect.width,
-            complete: () => {
-              currentSlide.classList.remove("current-slide");
-              resolve();
-            },
-          });
-        });
-      };
-
-      const slideTextAnimation = anime
+      const animateTextOut = anime
         .timeline({
           targets: currentSlide.querySelectorAll("h1 > span"),
-          direction: dir === "next" ? "normal" : "reverse",
+          direction: "reverse",
           duration: 800,
           delay: function (el, index) {
             return index * 50;
@@ -87,21 +72,68 @@
         .add({
           targets: currentSlide.querySelectorAll("p > span"),
           duration: 500,
-          direction: dir === "next" ? "normal" : "reverse",
           delay: function (el, index) {
             return index * 20;
           },
-          easing: "easeOutElastic",
           opacity: [0, 1],
-          translateY: function (el, index) {
-            return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
-          },
         });
 
-      // Get the next slide index
-      this.currentSlideIndex = 1;
+      const slideImageAnimation = () => {
+        return new Promise((resolve, reject) => {
+          anime({
+            targets: currentSlide,
+            duration: 800,
+            easing: "easeOutQuint",
+            translateX: dir === "next" ? -1 * this.rect.width : this.rect.width,
+            complete: () => {
+              currentSlide.classList.remove("current-slide");
+              resolve();
+            },
+          });
 
-      const nextSlide = this.slides[this.currentSlideIndex];
+          this.currentSlideIndex = 1;
+          const nextSlide = this.slides[this.currentSlideIndex];
+          nextSlide.classList.add("current-slide");
+
+          anime({
+            targets: nextSlide,
+            duration: 800,
+            easing: "easeOutQuint",
+            translateX: [
+              dir === "next" ? this.rect.width : -1 * this.rect.width,
+              0,
+            ],
+          });
+        });
+      };
+
+      const animateTextIn = () => {
+        const newSlide = this.slides[this.currentSlideIndex];
+
+        return anime
+          .timeline({
+            targets: newSlide.querySelectorAll("h1 > span"),
+            duration: 800,
+            delay: function (el, index) {
+              return index * 50;
+            },
+            easing: "easeOutElastic",
+            opacity: [0, 1],
+            translateY: function (el, index) {
+              return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+            },
+          })
+          .add({
+            targets: newSlide.querySelectorAll("p > span"),
+            duration: 500,
+            delay: function (el, index) {
+              return index * 20;
+            },
+            opacity: [0, 1],
+          });
+      };
+
+      animateTextOut.finished.then(slideImageAnimation).then(animateTextIn);
     }
   }
 
