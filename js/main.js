@@ -64,9 +64,16 @@
 
     initEvents() {
       this.navBtns.forEach((nav) => {
-        nav.addEventListener("click", () =>
-          this.navigate(this.navBtns.indexOf(nav))
-        );
+        nav.addEventListener("click", () => {
+          clearInterval(this.automaticAnimation);
+
+          this.navigate(this.navBtns.indexOf(nav));
+
+          this.automaticAnimation = setInterval(
+            () => this.navigate("next"),
+            6000
+          );
+        });
       });
 
       window.addEventListener(
@@ -78,18 +85,28 @@
 
       document.addEventListener("keydown", (ev) => {
         const keyCode = ev.keyCode || ev.which;
-        if (keyCode === 37) this.navigate("prev");
-        else if (keyCode === 39) this.navigate("next");
+        if (keyCode === 37) {
+          clearInterval(this.automaticAnimation);
+
+          this.navigate("prev");
+
+          this.automaticAnimation = setInterval(
+            () => this.navigate("next"),
+            6000
+          );
+        } else if (keyCode === 39) {
+          clearInterval(this.automaticAnimation);
+
+          this.navigate("next");
+
+          this.automaticAnimation = setInterval(
+            () => this.navigate("next"),
+            6000
+          );
+        }
       });
 
-      // this.automaticAnimation = setTimeout(() => {
-      //   this.currentSlideIndex =
-      //     this.currentSlideIndex + 1 === this.slidesTotal
-      //       ? 0
-      //       : this.currentSlideIndex + 1;
-
-      //   this.navigate(this.currentSlideIndex);
-      // }, 3000);
+      this.automaticAnimation = setInterval(() => this.navigate("next"), 6000);
     }
 
     navigate(index = null, dir = null) {
