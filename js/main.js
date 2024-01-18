@@ -30,7 +30,6 @@
       this.prevBtn = this.slideshowNav.querySelector(".prev");
 
       this.currentSlideIndex = 0;
-      this.prevSlideIndex = null;
       this.rect = this.slideshow.getBoundingClientRect();
 
       this.init();
@@ -48,6 +47,19 @@
           charming(title, { classPrefix: "letter" })
         );
         charming(slideSubtitle, { classPrefix: "letter" });
+
+        // Change opacity of the first slide content
+        if (this.currentSlideIndex === this.slides.indexOf(slide)) {
+          slideTitles.forEach((title) => {
+            title
+              .querySelectorAll("span")
+              .forEach((letter) => (letter.style.opacity = 1));
+
+            slideSubtitle
+              .querySelectorAll("span")
+              .forEach((letter) => (letter.style.opacity = 1));
+          });
+        }
       });
     }
 
@@ -106,8 +118,6 @@
               resolve();
             },
           });
-
-          // this.prevSlideIndex = this.currentSlideIndex;
 
           this.currentSlideIndex =
             dir === "next"
