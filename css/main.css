@@ -14,7 +14,7 @@ span {
 }
 
 h1 {
-  margin: 0 0 18px 0 !important;
+  margin: 0 !important;
   font-size: 50px;
   text-transform: uppercase;
   color: #3db642;
@@ -23,7 +23,7 @@ h1 {
 }
 
 h2 {
-  margin: 0 !important;
+  margin: 18px 0 0 0 !important;
   font-size: 25px !important;
   color: #fff;
   line-height: 30px !important;
@@ -114,3 +114,18 @@ h2 {
   height: 100%;
   width: 30px;
 } */
+
+.letter-effect {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
