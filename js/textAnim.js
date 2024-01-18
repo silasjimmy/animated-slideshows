@@ -38,10 +38,10 @@
     animateText(dir) {
       const currentSlide = this.slides[this.currentSlideIndex];
 
-      const animateText = (dir) => {
+      const animateText = (slide, dir) => {
         const animation = anime
           .timeline({
-            targets: currentSlide.querySelectorAll("h1 > span"),
+            targets: slide.querySelectorAll("h1 > span"),
             direction: dir === "next" ? "normal" : "reverse",
             duration: 800,
             delay: function (el, index) {
@@ -54,7 +54,7 @@
             },
           })
           .add({
-            targets: currentSlide.querySelectorAll("h2 > span"),
+            targets: slide.querySelectorAll("h2 > span"),
             duration: 500,
             delay: function (el, index) {
               return index * 30;

@@ -30,14 +30,31 @@
       this.prevBtn = this.slideshowNav.querySelector(".prev");
 
       this.currentSlideIndex = 0;
+      this.prevSlideIndex = null;
       this.rect = this.slideshow.getBoundingClientRect();
 
+      this.init();
       this.initEvents();
+    }
+
+    init() {
+      this.slides.forEach((slide) => {
+        const slideContent = slide.querySelector(".slide--content");
+        const slideTitles = Array.from(slideContent.querySelectorAll("h1"));
+        const slideSubtitle = slideContent.querySelector("h2");
+
+        // Split slide content to letters/spans
+        slideTitles.forEach((title) =>
+          charming(title, { classPrefix: "letter" })
+        );
+        charming(slideSubtitle, { classPrefix: "letter" });
+      });
     }
 
     initEvents() {
       this.nextBtn.addEventListener("click", () => this.navigate("next"));
       this.prevBtn.addEventListener("click", () => this.navigate("prev"));
+
       window.addEventListener(
         "resize",
         debounce(() => {
@@ -50,10 +67,35 @@
       if (this.isAnimating) return false;
       this.isAnimating = true;
 
-      const animateSlides = () => {
-        return new Promise((resolve, reject) => {
-          const currentSlide = this.slides[this.currentSlideIndex];
+      const animateTextOut = anime
+        .timeline({
+          targets:
+            this.slides[this.currentSlideIndex].querySelectorAll("h1 > span"),
+          duration: 800,
+          direction: "reverse",
+          delay: function (el, index) {
+            return index * 50;
+          },
+          easing: "easeOutElastic",
+          opacity: [0, 1],
+          translateY: function (el, index) {
+            return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+          },
+        })
+        .add({
+          targets:
+            this.slides[this.currentSlideIndex].querySelectorAll("h2 > span"),
+          duration: 500,
+          delay: function (el, index) {
+            return index * 30;
+          },
+          opacity: [0, 1],
+        });
 
+      const animateSlides = () => {
+        const currentSlide = this.slides[this.currentSlideIndex];
+
+        return new Promise((resolve, reject) => {
           anime({
             targets: currentSlide,
             duration: 600,
@@ -64,6 +106,8 @@
               resolve();
             },
           });
+
+          // this.prevSlideIndex = this.currentSlideIndex;
 
           this.currentSlideIndex =
             dir === "next"
@@ -94,24 +138,40 @@
             duration: 600 * 4,
             easing: "easeOutQuint",
             translateX: [dir === "next" ? 200 : -200, 0],
-          });
-
-          anime({
-            targets: [
-              newSlide.querySelector("h1"),
-              newSlide.querySelector("h2"),
-            ],
-            duration: 600 * 2,
-            easing: "easeOutQuint",
-            delay: (t, i) => i * 100 + 100,
-            translateX: [dir === "next" ? 300 : -300, 0],
-            opacity: [0, 1],
             complete: () => (this.isAnimating = false),
           });
         });
       };
 
-      animateSlides();
+      const animateTextIn = () => {
+        const animation = anime
+          .timeline({
+            targets:
+              this.slides[this.currentSlideIndex].querySelectorAll("h1 > span"),
+            duration: 800,
+            delay: function (el, index) {
+              return index * 50;
+            },
+            easing: "easeOutElastic",
+            opacity: [0, 1],
+            translateY: function (el, index) {
+              return index % 2 === 0 ? ["-80%", "0%"] : ["80%", "0%"];
+            },
+          })
+          .add({
+            targets:
+              this.slides[this.currentSlideIndex].querySelectorAll("h2 > span"),
+            duration: 500,
+            delay: function (el, index) {
+              return index * 30;
+            },
+            opacity: [0, 1],
+          });
+
+        return animation;
+      };
+
+      animateTextOut.finished.then(animateSlides).then(animateTextIn);
     }
   }
 
