@@ -29,7 +29,6 @@
       this.navBtns = Array.from(this.slideshowNav.querySelectorAll("span"));
 
       this.currentSlideIndex = 0;
-      this.prevSlideIndex = null;
       this.rect = this.slideshow.getBoundingClientRect();
 
       this.init();
@@ -83,26 +82,28 @@
         else if (keyCode === 39) this.navigate("next");
       });
 
-      this.automaticAnimation = setTimeout(() => {
-        this.currentSlideIndex =
-          this.currentSlideIndex + 1 === this.slidesTotal
-            ? 0
-            : this.currentSlideIndex + 1;
+      // this.automaticAnimation = setTimeout(() => {
+      //   this.currentSlideIndex =
+      //     this.currentSlideIndex + 1 === this.slidesTotal
+      //       ? 0
+      //       : this.currentSlideIndex + 1;
 
-        this.navigate(this.currentSlideIndex);
-      }, 3000);
+      //   this.navigate(this.currentSlideIndex);
+      // }, 3000);
     }
 
-    navigate(index) {
-      if (index === this.currentSlideIndex) return;
+    navigate(index = null, dir = null) {
+      if (typeof index === "number") {
+        if (index === this.currentSlideIndex) return;
 
-      // Calculate direction of the slides
-      let dir =
-        this.currentSlideIndex + 1 === this.slidesTotal && index === 0
-          ? "next"
-          : index > this.currentSlideIndex
-          ? "next"
-          : "prev";
+        // Calculate direction of the slides
+        dir =
+          this.currentSlideIndex + 1 === this.slidesTotal && index === 0
+            ? "next"
+            : index > this.currentSlideIndex
+            ? "next"
+            : "prev";
+      } else dir = index;
 
       if (this.isAnimating) return false;
       this.isAnimating = true;
@@ -147,7 +148,16 @@
             },
           });
 
-          this.currentSlideIndex = index;
+          if (typeof index === "number") this.currentSlideIndex = index;
+          else
+            this.currentSlideIndex =
+              dir === "next"
+                ? this.currentSlideIndex < this.slidesTotal - 1
+                  ? this.currentSlideIndex + 1
+                  : 0
+                : this.currentSlideIndex > 0
+                ? this.currentSlideIndex - 1
+                : this.slidesTotal - 1;
 
           const newSlide = this.slides[this.currentSlideIndex];
           newSlide.classList.add("current--slide");
