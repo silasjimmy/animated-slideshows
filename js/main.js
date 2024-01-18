@@ -27,6 +27,9 @@
 
       this.slideshowNav = this.slideshow.querySelector(".slide--nav");
       this.navBtns = Array.from(this.slideshowNav.querySelectorAll("span"));
+      this.indicatorBars = Array.from(
+        this.slideshowNav.querySelectorAll(".bar")
+      );
 
       this.currentSlideIndex = 0;
       this.rect = this.slideshow.getBoundingClientRect();
@@ -124,6 +127,10 @@
 
       if (this.isAnimating) return false;
       this.isAnimating = true;
+
+      this.navBtns[this.currentSlideIndex].classList.remove(
+        "current--indicator"
+      );
 
       const animateTextOut = anime
         .timeline({
@@ -223,7 +230,12 @@
               return index * 30;
             },
             opacity: [0, 1],
-            complete: () => (this.isAnimating = false),
+            complete: () => {
+              this.navBtns[this.currentSlideIndex].classList.add(
+                "current--indicator"
+              );
+              this.isAnimating = false;
+            },
           });
 
         return animation;

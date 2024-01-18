@@ -107,6 +107,10 @@ h2 {
   color: #3db642;
 }
 
+.slide--nav span.current--indicator {
+  color: #3db642;
+}
+
 .slide--nav .bar {
   width: 50px;
   height: 3px;
@@ -117,8 +121,30 @@ h2 {
 /* .slide--nav .bar--inner {
   background-color: #3db642;
   height: 100%;
-  width: 30px;
+  width: 20px;
+  -webkit-animation: animateBar 5s linear;
+  animation: animateBar 5s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 } */
+
+@keyframes animateBar {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 50px;
+  }
+}
+
+@-webkit-keyframes animateBar {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 50px;
+  }
+}
 
 .letter-effect {
   display: -webkit-flex;
