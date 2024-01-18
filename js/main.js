@@ -29,6 +29,7 @@
       this.navBtns = Array.from(this.slideshowNav.querySelectorAll("span"));
 
       this.currentSlideIndex = 0;
+      this.prevSlideIndex = null;
       this.rect = this.slideshow.getBoundingClientRect();
 
       this.init();
