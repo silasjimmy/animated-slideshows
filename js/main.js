@@ -73,6 +73,12 @@
           this.rect = this.slideshow.getBoundingClientRect();
         }, 20)
       );
+
+      document.addEventListener("keydown", (ev) => {
+        const keyCode = ev.keyCode || ev.which;
+        if (keyCode === 37) this.navigate("prev");
+        else if (keyCode === 39) this.navigate("next");
+      });
     }
 
     navigate(dir) {
