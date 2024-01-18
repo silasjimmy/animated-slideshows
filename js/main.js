@@ -26,8 +26,7 @@
       this.slidesTotal = this.slides.length;
 
       this.slideshowNav = this.slideshow.querySelector(".slide--nav");
-      this.nextBtn = this.slideshowNav.querySelector(".next");
-      this.prevBtn = this.slideshowNav.querySelector(".prev");
+      this.navBtns = Array.from(this.slideshowNav.querySelectorAll("span"));
 
       this.currentSlideIndex = 0;
       this.rect = this.slideshow.getBoundingClientRect();
@@ -64,8 +63,11 @@
     }
 
     initEvents() {
-      this.nextBtn.addEventListener("click", () => this.navigate("next"));
-      this.prevBtn.addEventListener("click", () => this.navigate("prev"));
+      this.navBtns.forEach((nav) => {
+        nav.addEventListener("click", () =>
+          this.navigate(this.navBtns.indexOf(nav))
+        );
+      });
 
       window.addEventListener(
         "resize",
@@ -79,9 +81,28 @@
         if (keyCode === 37) this.navigate("prev");
         else if (keyCode === 39) this.navigate("next");
       });
+
+      this.automaticAnimation = setTimeout(() => {
+        this.currentSlideIndex =
+          this.currentSlideIndex + 1 === this.slidesTotal
+            ? 0
+            : this.currentSlideIndex + 1;
+
+        this.navigate(this.currentSlideIndex);
+      }, 3000);
     }
 
-    navigate(dir) {
+    navigate(index) {
+      if (index === this.currentSlideIndex) return;
+
+      // Calculate direction of the slides
+      let dir =
+        this.currentSlideIndex + 1 === this.slidesTotal && index === 0
+          ? "next"
+          : index > this.currentSlideIndex
+          ? "next"
+          : "prev";
+
       if (this.isAnimating) return false;
       this.isAnimating = true;
 
@@ -125,14 +146,7 @@
             },
           });
 
-          this.currentSlideIndex =
-            dir === "next"
-              ? this.currentSlideIndex < this.slidesTotal - 1
-                ? this.currentSlideIndex + 1
-                : 0
-              : this.currentSlideIndex > 0
-              ? this.currentSlideIndex - 1
-              : this.slidesTotal - 1;
+          this.currentSlideIndex = index;
 
           const newSlide = this.slides[this.currentSlideIndex];
           newSlide.classList.add("current--slide");
@@ -154,7 +168,6 @@
             duration: 600 * 4,
             easing: "easeOutQuint",
             translateX: [dir === "next" ? 200 : -200, 0],
-            complete: () => (this.isAnimating = false),
           });
         });
       };
@@ -182,6 +195,7 @@
               return index * 30;
             },
             opacity: [0, 1],
+            complete: () => (this.isAnimating = false),
           });
 
         return animation;
