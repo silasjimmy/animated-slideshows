@@ -1,3 +1,8 @@
+:root {
+  --bg-color: #fff;
+  --accent-color: #3db642;
+}
+
 .b {
   border: 1px solid white;
 }
@@ -42,6 +47,13 @@ h2 {
 
 /* Navbar styles */
 
+.navbar-fixed {
+  position: absolute !important;
+  height: 100px !important;
+  transition: all ease-in-out 0.3s;
+  -webkit-transition: all ease-in-out 0.3s;
+}
+
 nav {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
@@ -72,6 +84,18 @@ nav .logo svg {
 
 nav .logo svg:hover {
   fill: #3db642;
+}
+
+nav .brand-logo {
+  font-size: 28px;
+  font-family: "Dancing Script", cursive;
+  font-weight: 400;
+  transition: color 0.3s ease-in-out !important;
+}
+
+nav .sidenav-trigger i:hover,
+nav .brand-logo:hover {
+  color: #3db642 !important;
 }
 
 nav,
@@ -105,23 +129,33 @@ nav ul li.active {
   font-weight: bold;
 }
 
-.navbar-fixed {
-  position: absolute !important;
-  height: 100px !important;
+.navbar--animate {
+  height: 64px !important;
 }
 
-.navbar--animate {
+.navbar--animate nav {
   background-color: #ffffff;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
+  height: 64px !important;
 }
 
-.navbar--animate ul a,
-.navbar--animate .brand-logo,
-.navbar--animate .sidenav-trigger {
-  color: black;
+.navbar--animate nav i,
+.navbar--animate nav,
+.navbar--animate nav [class^="mdi-"],
+.navbar--animate nav [class*="mdi-"],
+.navbar--animate nav i.material-icons,
+.navbar--animate nav .sidenav-trigger i {
+  height: 64px !important;
+  line-height: 64px !important;
+}
+
+nav .brand-logo,
+.navbar--animate nav ul a:not(.btn),
+.navbar--animate nav .sidenav-trigger {
+  color: black !important;
 }
 
 /* Button styles */
