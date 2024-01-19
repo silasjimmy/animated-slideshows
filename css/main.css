@@ -1,5 +1,5 @@
 .b {
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
 body {
@@ -58,8 +58,8 @@ nav [class^="mdi-"],
 nav [class*="mdi-"],
 nav i.material-icons,
 nav .sidenav-trigger i {
-  height: 64px;
-  line-height: 64px;
+  height: 100px !important;
+  line-height: 100px !important;
 }
 
 nav ul a {
@@ -82,19 +82,20 @@ nav ul li.active {
 
 .navbar-fixed {
   position: absolute !important;
-  height: 64px;
+  height: 100px !important;
 }
 
-.brand-logo {
+/* .brand-logo {
   font-family: "Dancing Script", cursive;
-  font-weight: 400;
+  font-weight: 600;
+  text-transform: capitalize;
   transition: color 0.3s ease-in-out !important;
 }
 
 .brand-logo:hover,
 nav .sidenav-trigger i:hover {
   color: #3db642;
-}
+} */
 
 .navbar--animate {
   background-color: #ffffff;
