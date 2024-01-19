@@ -1,9 +1,13 @@
 :root {
-  --bg-color: #fff;
-  --accent-color: #3db642;
+  --dark-pri-color: #212121;
+  --dark-sec-color: #fafafa;
+  --light-color: #fff;
+  --accent-pri-color: #3db642;
+  --accent-sec-color: #f7ac22;
 
-  --fs-h1: 20px;
-  --fs-h2: 15px;
+  --fs-title: 20px;
+  --fs-subtitle: 15px;
+  --fs-txt: 10px;
 }
 
 .b {
@@ -23,8 +27,19 @@ h1,
 h2,
 span,
 a,
-p {
+p,
+blockquote {
   font-family: "Raleway", sans-serif;
+}
+
+blockquote {
+  margin: 0 !important;
+  font-size: 20px;
+  font-weight: 700;
+  border-left: 15px solid #f7ac22 !important;
+  background-color: #fff;
+  border-radius: 0 20px 20px 0;
+  line-height: 1.8;
 }
 
 h1 span,

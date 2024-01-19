@@ -1,3 +1,8 @@
+$(document).ready(function () {
+  $(".tabs").tabs();
+  $(".collapsible").collapsible();
+});
+
 const navbarWrapper = document.querySelector(".navbar-fixed");
 const navbar = navbarWrapper.querySelector("nav");
 const largeLogo = navbarWrapper.querySelector(".logo");
