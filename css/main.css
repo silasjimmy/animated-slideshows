@@ -9,7 +9,8 @@ body {
 
 h1,
 h2,
-span {
+span,
+a {
   font-family: "Raleway", sans-serif;
 }
 
@@ -34,6 +35,82 @@ h2 {
   line-height: 30px !important;
   font-weight: 600 !important;
 }
+
+/* Navbar styles */
+
+nav {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+nav .nav-wrapper {
+  padding: 0 50px;
+}
+
+nav .sidenav-trigger i {
+  -webkit-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+}
+
+nav,
+nav i,
+nav [class^="mdi-"],
+nav [class*="mdi-"],
+nav i.material-icons,
+nav .sidenav-trigger i {
+  height: 64px;
+  line-height: 64px;
+}
+
+nav ul a {
+  -webkit-transition: color 0.3s ease-in-out !important;
+  transition: color 0.3s ease-in-out !important;
+  font-size: 16px !important;
+  font-weight: 500;
+}
+
+nav ul a:hover {
+  background-color: transparent !important;
+  color: #3db642;
+}
+
+nav ul li.active {
+  background-color: transparent;
+  color: #3db642;
+  font-weight: bold;
+}
+
+.navbar-fixed {
+  position: absolute !important;
+  height: 64px;
+}
+
+.brand-logo {
+  font-family: "Dancing Script", cursive;
+  font-weight: 400;
+  transition: color 0.3s ease-in-out !important;
+}
+
+.brand-logo:hover,
+nav .sidenav-trigger i:hover {
+  color: #3db642;
+}
+
+.navbar--animate {
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.navbar--animate ul a,
+.navbar--animate .brand-logo,
+.navbar--animate .sidenav-trigger {
+  color: black;
+}
+
+/* Slideshow styles */
 
 .slideshow {
   width: 100%;
