@@ -2,6 +2,10 @@
   border: 1px solid white;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   user-select: none;
@@ -52,6 +56,24 @@ nav .sidenav-trigger i {
   transition: color 0.3s ease-in-out;
 }
 
+nav .logo {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+nav .logo svg {
+  width: 80px;
+  fill: #ffffff;
+  transition: fill ease-in-out 0.3s;
+  -webkit-transition: fill ease-in-out 0.3s;
+}
+
+nav .logo svg:hover {
+  fill: #3db642;
+}
+
 nav,
 nav i,
 nav [class^="mdi-"],
@@ -63,13 +85,16 @@ nav .sidenav-trigger i {
 }
 
 nav ul a {
-  -webkit-transition: color 0.3s ease-in-out !important;
-  transition: color 0.3s ease-in-out !important;
-  font-size: 16px !important;
-  font-weight: 500;
+  margin: 0 10px;
 }
 
-nav ul a:hover {
+nav ul a:not(.btn) {
+  -webkit-transition: color 0.3s ease-in-out !important;
+  transition: color 0.3s ease-in-out !important;
+  font-weight: 600;
+}
+
+nav ul a:not(.btn):hover {
   background-color: transparent !important;
   color: #3db642;
 }
@@ -85,18 +110,6 @@ nav ul li.active {
   height: 100px !important;
 }
 
-/* .brand-logo {
-  font-family: "Dancing Script", cursive;
-  font-weight: 600;
-  text-transform: capitalize;
-  transition: color 0.3s ease-in-out !important;
-}
-
-.brand-logo:hover,
-nav .sidenav-trigger i:hover {
-  color: #3db642;
-} */
-
 .navbar--animate {
   background-color: #ffffff;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -109,6 +122,18 @@ nav .sidenav-trigger i:hover {
 .navbar--animate .brand-logo,
 .navbar--animate .sidenav-trigger {
   color: black;
+}
+
+/* Button styles */
+
+.btn {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  background-color: #3db642 !important;
+  text-transform: none !important;
+  font-weight: 600;
+  border-radius: 20px !important;
+  padding: 0 28px !important;
 }
 
 /* Slideshow styles */
@@ -237,4 +262,14 @@ nav .sidenav-trigger i:hover {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 992px) {
+  nav .logo {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
 }
