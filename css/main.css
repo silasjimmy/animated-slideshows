@@ -29,7 +29,8 @@ h2,
 span,
 a,
 p,
-blockquote {
+blockquote,
+i {
   font-family: "Raleway", sans-serif;
 }
 
@@ -205,7 +206,7 @@ nav .brand-logo,
 .section--title {
   font-family: "Dancing Script", cursive;
   text-transform: capitalize;
-  /* margin: 50px 0 0 0 !important; */
+  margin-bottom: 30px !important;
 }
 
 /* Image styles */
@@ -348,6 +349,40 @@ img {
   flex-wrap: wrap;
 }
 
+/* Collapsible */
+
+.collapsible {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  border-radius: 10px !important;
+}
+
+.collapsible .collapsible-header {
+  padding: 10px 20px !important;
+  background-color: var(--light-color) !important;
+  align-items: center !important;
+}
+
+.collapsible .collapsible-header i {
+  width: auto !important;
+  font-size: 40px;
+  margin-right: 50px !important;
+}
+
+.collapsible .collapsible-header span {
+  font-weight: 600;
+}
+
+.collapsible .collapsible-header.curve--top {
+  border-radius: 10px 10px 0 0;
+}
+
+.collapsible .collapsible-body {
+  background-color: var(--light-color);
+}
+
 /* Footer styles */
 
 .page-footer {
@@ -414,6 +449,14 @@ img {
 /* Helper classes */
 .wrapper--spacing {
   padding: 0 50px;
+}
+
+.section--wrapper {
+  margin: 50px 0;
+}
+
+.border--none {
+  border: none !important;
 }
 
 /* Media Queries */
