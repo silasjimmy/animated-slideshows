@@ -85,7 +85,10 @@ strong {
   -webkit-transition: all ease-in-out 0.3s;
 }
 
-nav {
+nav,
+.btn,
+.collapsible,
+.card {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
@@ -192,8 +195,6 @@ nav .brand-logo,
 /* Button styles */
 
 .btn {
-  box-shadow: none !important;
-  -webkit-box-shadow: none !important;
   background-color: #3db642 !important;
   text-transform: none !important;
   font-weight: 600;
@@ -352,8 +353,6 @@ img {
 /* Collapsible */
 
 .collapsible {
-  box-shadow: none !important;
-  -webkit-box-shadow: none !important;
   border: none !important;
   margin: 0 !important;
   border-radius: 10px !important;
