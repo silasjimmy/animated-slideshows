@@ -11,7 +11,7 @@
 }
 
 .b {
-  border: 1px solid white;
+  border: 1px solid black;
 }
 
 html {
@@ -352,7 +352,26 @@ img {
 
 .page-footer {
   padding: 0 !important;
-  color: #fff;
+  background-color: var(--light-color) !important;
+  color: var(--dark-pri-color) !important;
+}
+
+.page-footer .container {
+  padding: 14px 0;
+}
+
+.page-footer .contact--info {
+  display: inline-flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.page-footer .contact--info i {
+  margin-right: 8px;
+}
+
+.page-footer .contact--info span {
+  font-weight: 600;
 }
 
 .page-footer .footer-copyright {
@@ -377,6 +396,20 @@ img {
   height: 26px;
   fill: var(--light-color);
 }
+
+/* Grid styles */
+
+.row {
+  margin-bottom: 0 !important;
+}
+
+/* .row .col {
+  padding: 10px 0 !important;
+}
+
+.row .col p {
+  margin: 0 !important;
+} */
 
 /* Helper classes */
 .wrapper--spacing {
