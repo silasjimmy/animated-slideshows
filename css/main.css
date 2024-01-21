@@ -1,14 +1,32 @@
 :root {
   --dark-pri-color: #212121;
   --dark-sec-color: #eeeeee;
-  --light-pri-color: #fff;
+  --light-pri-color: #ffffff;
   --light-sec-color: #f5f5f5;
   --accent-pri-color: #3db642;
   --accent-sec-color: #f7ac22;
 
-  --fs-title: 20px;
-  --fs-subtitle: 15px;
-  --fs-txt: 10px;
+  --fs-large: 30px;
+  --fs-medium: 23px;
+  --fs-normal: 20px;
+  --fs-small: 15px;
+
+  --fw-large: 700;
+  --fw-medium: 600;
+  --fw-normal: 400;
+  --fw-small: 400;
+
+  --lh-large: 30px;
+  --lh-medium: 18px;
+  --navbar-height: 100px;
+
+  --spacing-bottom-p: 10px;
+  --spacing-bottom-h1: 30px;
+  --spacing--container: 50px;
+  --spacing-even: 20px;
+
+  --curve-large: 20px;
+  --curve-medium: 10px;
 }
 
 .b {
@@ -25,75 +43,91 @@ body {
   background-color: var(--light-sec-color);
 }
 
-h1,
-h2,
-h3,
-h4,
-span,
-a,
-p,
-blockquote,
-i {
+body * {
   font-family: "Raleway", sans-serif;
-}
-
-blockquote {
-  margin: 0 !important;
-  font-size: 20px;
-  font-weight: 700;
-  border-left: 15px solid #f7ac22 !important;
-  background-color: #fff;
-  border-radius: 0 20px 20px 0;
-  line-height: 1.8;
-  padding: 20px;
-}
-
-h1 span,
-h2 span {
-  opacity: 0;
 }
 
 h1 {
   margin: 0 !important;
-  font-size: 50px;
-  text-transform: uppercase;
-  color: #3db642;
-  font-weight: 700 !important;
-  line-height: 60px !important;
+  font-size: var(--fs-large);
+  color: var(--accent-pri-color);
 }
 
 h2 {
-  margin: 18px 0 0 0 !important;
-  font-size: 25px !important;
-  color: #fff;
-  line-height: 30px !important;
-  font-weight: 600 !important;
+  margin: 0 !important;
+  font-size: var(--fs-medium) !important;
+  color: var(--light-pri-color);
 }
 
 h3 {
-  font-size: 18px !important;
-  margin: 0 0 8px 0 !important;
-  font-weight: 600 !important;
+  margin: 0 !important;
+  font-size: var(--fs-normal) !important;
+  font-weight: var(--fw-medium) !important;
 }
 
 h4 {
-  font-size: 14px !important;
   margin: 0 !important;
-  font-weight: 500 !important;
-  line-height: 1.5 !important;
+  font-size: var(--fs-small) !important;
+  font-weight: var(--fw-normal) !important;
+  line-height: var(--lh-medium) !important;
 }
 
 p {
-  font-weight: 500;
+  margin-bottom: var(--spacing-bottom-p);
+  font-size: var(--fs-small) !important;
+  line-height: var(--lh-large) !important;
+  font-weight: var(--fw-normal);
   text-align: justify;
-  line-height: 1.8;
+  color: var(--dark-pri-color);
 }
 
 strong {
-  font-weight: 700 !important;
+  font-weight: var(--fw-medium) !important;
 }
 
-/* Navbar styles */
+blockquote {
+  margin: 0 !important;
+  font-size: var(--fs-medium);
+  font-weight: var(--fw-large);
+  border-left: 15px solid var(--accent-sec-color) !important;
+  background-color: var(--light-pri-color);
+  border-radius: 0 var(--curve-large) var(--curve-large) 0;
+  line-height: var(--lh-large);
+  padding: var(--spacing-even);
+}
+
+/* Helper classes */
+
+.section--title {
+  font-family: "Dancing Script", cursive;
+  text-transform: capitalize;
+  margin-bottom: var(--spacing-bottom-h1) !important;
+}
+
+.wrapper--spacing {
+  padding: 0 var(--spacing--container);
+}
+
+.section--wrapper {
+  margin: var(--spacing--container) 0;
+}
+
+.border--none {
+  border: none !important;
+}
+
+/* Materialize CSS override */
+
+nav,
+.btn,
+.collapsible,
+.card,
+.card-panel {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* Navbar */
 
 .navbar--wrapper {
   position: absolute;
@@ -106,17 +140,8 @@ nav {
   background-color: transparent !important;
 }
 
-nav,
-.btn,
-.collapsible,
-.card,
-.card-panel {
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-}
-
 nav .nav-wrapper {
-  padding: 0 50px;
+  padding: 0 var(--spacing--container);
 }
 
 nav .sidenav-trigger i {
@@ -133,25 +158,13 @@ nav .logo {
 
 nav .logo svg {
   width: 80px;
-  fill: #ffffff;
+  fill: var(--light-pri-color);
   transition: fill ease-in-out 0.3s;
   -webkit-transition: fill ease-in-out 0.3s;
 }
 
 nav .logo svg:hover {
-  fill: #3db642;
-}
-
-nav .brand-logo {
-  font-size: 28px;
-  font-family: "Dancing Script", cursive;
-  font-weight: 400;
-  transition: color 0.3s ease-in-out !important;
-}
-
-nav .sidenav-trigger i:hover,
-nav .brand-logo:hover {
-  color: #3db642 !important;
+  fill: var(--accent-pri-color);
 }
 
 nav,
@@ -160,61 +173,33 @@ nav [class^="mdi-"],
 nav [class*="mdi-"],
 nav i.material-icons,
 nav .sidenav-trigger i {
-  height: 100px !important;
-  line-height: 100px !important;
+  height: var(--navbar-height) !important;
+  line-height: var(--navbar-height) !important;
 }
 
 nav ul a {
-  margin: 0 10px;
+  margin: 0 var(--spacing-bottom-p);
+  font-size: var(--fs-small) !important;
+  font-weight: var(--fw-medium);
 }
 
 nav ul a:not(.btn) {
   -webkit-transition: color 0.3s ease-in-out !important;
   transition: color 0.3s ease-in-out !important;
-  font-weight: 600;
 }
 
 nav ul a:not(.btn):hover {
   background-color: transparent !important;
-  color: #3db642;
+  color: var(--accent-pri-color);
 }
 
 nav ul li.active {
   background-color: transparent;
-  color: #3db642;
-  font-weight: bold;
+  color: var(--accent-pri-color);
+  font-weight: var(--fw-large);
 }
 
-.navbar--animate {
-  height: 64px !important;
-}
-
-.navbar--animate nav {
-  background-color: #ffffff;
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
-  height: 64px !important;
-}
-
-.navbar--animate nav i,
-.navbar--animate nav,
-.navbar--animate nav [class^="mdi-"],
-.navbar--animate nav [class*="mdi-"],
-.navbar--animate nav i.material-icons,
-.navbar--animate nav .sidenav-trigger i {
-  height: 64px !important;
-  line-height: 64px !important;
-}
-
-nav .brand-logo,
-.navbar--animate nav ul a:not(.btn),
-.navbar--animate nav .sidenav-trigger {
-  color: black !important;
-}
-
-/* Button styles */
+/* Buttons */
 
 .btn,
 .btn-flat {
@@ -230,14 +215,6 @@ nav .brand-logo,
 
 .btn-flat {
   padding: 0 !important;
-}
-
-/* Heading styles */
-
-.section--title {
-  font-family: "Dancing Script", cursive;
-  text-transform: capitalize;
-  margin-bottom: 30px !important;
 }
 
 /* Image styles */
@@ -421,6 +398,17 @@ img {
   max-width: 450px;
 }
 
+.slide--content h1 {
+  text-transform: uppercase;
+  font-weight: var(--fw-large) !important;
+  line-height: 60px !important;
+}
+
+.slide--content h1 span,
+.slide--content h2 span {
+  opacity: 0;
+}
+
 .slide.current--slide {
   opacity: 1;
   pointer-events: auto;
@@ -597,19 +585,6 @@ img {
 .row .col p {
   margin: 0 !important;
 } */
-
-/* Helper classes */
-.wrapper--spacing {
-  padding: 0 50px;
-}
-
-.section--wrapper {
-  margin: 50px 0;
-}
-
-.border--none {
-  border: none !important;
-}
 
 /* Media Queries */
 
