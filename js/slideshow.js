@@ -109,7 +109,7 @@
         }
       });
 
-      //   this.automaticAnimation = setInterval(() => this.navigate("next"), 6000);
+      this.automaticAnimation = setInterval(() => this.navigate("next"), 6000);
     }
 
     navigate(index = null, dir = null) {

@@ -571,6 +571,12 @@ img {
   width: 26px;
   height: 26px;
   fill: var(--light-pri-color);
+  transition: fill ease-in-out 0.3s;
+  -webkit-transition: fill ease-in-out 0.3s;
+}
+
+.page-footer .footer-copyright .socials a svg:hover {
+  fill: var(--accent-pri-color);
 }
 
 .page-footer .footer-copyright .legal a {
@@ -594,14 +600,6 @@ img {
 .row {
   margin-bottom: 0 !important;
 }
-
-/* .row .col {
-  padding: 10px 0 !important;
-}
-
-.row .col p {
-  margin: 0 !important;
-} */
 
 /* Media Queries */
 
